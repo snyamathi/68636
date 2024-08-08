@@ -1,0 +1,44 @@
+services:
+  counting-service:
+    image: hashicorp/counting-service:0.0.2
+  next-20.15.1:
+    build:
+      context: ./next
+      args:
+        - NODE_VERSION=20.15.1
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+  next-20.16.0:
+    build:
+      context: ./next
+      args:
+        - NODE_VERSION=20.16.0
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+  node-20.15.1:
+    image: node:20.15.1
+    command: index.mjs
+    volumes:
+      - ./vanilla/index.mjs:/index.mjs
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+  node-20.16.0:
+    image: node:20.16.0
+    command: index.mjs
+    volumes:
+      - ./vanilla/index.mjs:/index.mjs
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+  siege:
+    image: yokogawa/siege
+    command: -c 100 -f /opt/urls.txt
+    volumes:
+      - ./siege/urls.txt:/opt/urls.txt
