@@ -10,4 +10,4 @@
 1. use new node version `nvm use 20.16.0`
 2. start server `npm start`
 3. start load testing `ab -c 100 -t 100 http://localhost:3000/`
-4. Observer out of memory error
+4. Observe out of memory error
